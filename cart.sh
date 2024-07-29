@@ -87,17 +87,6 @@ systemctl start cart
 
 VALIDATE $? "Starting cart" &>> $LOGFILE
 
-cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-
-VALIDATE $? "Copied MongoDB Repo" 
-
-dnf install mongodb-org-shell -y
-
-VALIDATE $? "Installing MongoDB client" &>> $LOGFILE
-
-mongo --host $MONGDB_HOST </app/schema/cart.js
-
-VALIDATE $? "Loding cart data into MongoDB client" &>> $LOGFILE
 
 
 

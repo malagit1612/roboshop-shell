@@ -32,15 +32,15 @@ fi
 
 dnf module disable nodejs -y
 
-VALIDATE $? "Disabling current nodeJs" &>> $LOGFILE
+VALIDATE $? "$R Disabling current nodeJs $N" &>> $LOGFILE
 
 dnf module enable nodejs:18 -y
 
-VALIDATE $? "Enabling nodeJs:18" &>> $LOGFILE
+VALIDATE $? "$Y Enabling nodeJs:18 $N" &>> $LOGFILE
 
 dnf install nodejs -y
 
-VALIDATE $? "Installing nodeJs:18" &>> $LOGFILE
+VALIDATE $? "$G Installing nodeJs:18 $N" &>> $LOGFILE
 
 id roboshop # if roboshop user doesnot exits, then it is a failure
 if [ $? -ne 0 ]
@@ -63,20 +63,20 @@ cd /app
 
 unzip -o /tmp/catalogue.zip
 
-VALIDATE $? "Unzipping Catalogue" &>> $LOGFILE
+VALIDATE $? "$R Unzipping Catalogue $N" &>> $LOGFILE
 
 npm install 
 
-VALIDATE $? "Installing Dependencies" &>> $LOGFILE
+VALIDATE $? "$G Installing Dependencies $N" &>> $LOGFILE
 
 #use absoulte path, because catalogue.service exists there
 cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
 
-VALIDATE $? "Coping catalogue service file" &>> $LOGFILE
+VALIDATE $? "$Y Coping catalogue service file $N" &>> $LOGFILE
 
 systemctl daemon-reload
 
-VALIDATE $? "Catalogue Demon reload" &>> $LOGFILE
+VALIDATE $? "$G Catalogue Demon reload $N" &>> $LOGFILE
 
 systemctl enable catalogue
 
@@ -92,7 +92,7 @@ VALIDATE $? "Copied MongoDB Repo"
 
 dnf install mongodb-org-shell -y
 
-VALIDATE $? "Installing MongoDB client" &>> $LOGFILE
+VALIDATE $? "$G Installing MongoDB client $N" &>> $LOGFILE
 
 mongo --host $MONGDB_HOST </app/schema/catalogue.js
 

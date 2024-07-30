@@ -28,6 +28,7 @@ then
     exit 1 #you can give other than 0
 else 
     echo "you are root user"
+
 fi 
 
 dnf module disable nodejs -y
